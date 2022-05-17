@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Spinner } from "react-bootstrap";
 import { connect } from "react-redux";
+import NavigationBar from "../Navigation";
 
 import Characters from "./Characters";
 import Pagination from "./Pagination";
@@ -11,7 +12,7 @@ function Home(props) {
   const { loadingCharacterList, characterList } = props;
 
   return (
-    <Container fluid style={{ position: "relative" }}>
+    <Container fluid style={{ position: "relative" }} className="p-0">
       {loadingCharacterList && (
         <Container
           className="d-flex align-items-center justify-content-center"
@@ -32,6 +33,9 @@ function Home(props) {
           </div>
         </Container>
       )}
+
+      <NavigationBar />
+
       <Container>
         <Search />
 

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Card, Col, Row, Offcanvas, Image } from "react-bootstrap";
+import { Col, Row, Offcanvas } from "react-bootstrap";
 import { connect } from "react-redux";
 
 import { setSelectedCharacter } from "../../../store/actions";

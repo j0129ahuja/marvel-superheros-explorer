@@ -3,6 +3,7 @@ import { Col, Container, Row, Spinner, Offcanvas } from "react-bootstrap";
 import { getState } from "../../utils";
 import CharacterCard from "../Home/Characters/CharacterCard";
 import CharacterDetails from "../Home/Characters/CharacterDetails";
+import NavigationBar from "../Navigation";
 
 function Saved() {
   // STATES
@@ -28,7 +29,7 @@ function Saved() {
   }, []);
 
   return (
-    <Container fluid style={{ position: "relative" }}>
+    <Container fluid style={{ position: "relative" }} className="p-0">
       {loading && (
         <Container
           className="d-flex align-items-center justify-content-center"
@@ -49,6 +50,9 @@ function Saved() {
           </div>
         </Container>
       )}
+
+      <NavigationBar />
+
       <Container>
         <div className="py-3 py-md-5">
           <h2 className="text-center">Saved Characters</h2>
