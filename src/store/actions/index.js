@@ -4,6 +4,7 @@ import {
   SET_CHARACTER_LIST,
   SET_SELECTED_CHARACTER,
   SET_SEARCH_TEXT,
+  SET_TOTAL_COUNT,
 } from "./actionTypes";
 
 export const setCurrentPage = (data) => {
@@ -37,6 +38,13 @@ export const setSelectedCharacter = (data) => {
 export const setSearchText = (data) => {
   return {
     type: SET_SEARCH_TEXT,
+    data,
+  };
+};
+
+export const setTotalCount = (data) => {
+  return {
+    type: SET_TOTAL_COUNT,
     data,
   };
 };

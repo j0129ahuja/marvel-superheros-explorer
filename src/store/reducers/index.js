@@ -1,11 +1,12 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  currentPage: 0,
-  loadingCharacterList: false,
+  currentPage: 1,
+  loadingCharacterList: true,
   characterList: [],
   selectedCharacter: {},
   searchText: "",
+  totalCount: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +29,10 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SET_SEARCH_TEXT: {
       return { ...state, searchText: action.data };
+    }
+
+    case actionTypes.SET_TOTAL_COUNT: {
+      return { ...state, totalCount: action.data };
     }
 
     default:
