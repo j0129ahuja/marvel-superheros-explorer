@@ -1,15 +1,49 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Card } from "react-bootstrap";
 import { connect } from "react-redux";
 
 import { setSelectedCharacter } from "../../../store/actions";
+import { getState, setState } from "../../../utils";
 
 function CharacterCard(props) {
   // CONSTANTS
   const { character, setSelectedCharacter } = props;
 
+  // STATES
+  const [saved, setSaved] = useState(false);
+
   // FUNCTIONS
   const handleShow = () => setSelectedCharacter(character);
+
+  const handleSave = (character) => {
+    let savedList = getState("saved");
+
+    if (savedList?.length > 0) {
+      if (
+        savedList?.filter((element) => element.id === character.id)?.length > 0
+      ) {
+        setState("saved", [
+          ...savedList?.filter((element) => element.id !== character.id),
+        ]);
+        setSaved(false);
+      } else {
+        setState("saved", [...savedList, character]);
+        setSaved(true);
+      }
+    } else {
+      setState("saved", [character]);
+      setSaved(true);
+    }
+  };
+
+  useEffect(() => {
+    let savedList = getState("saved");
+    if (
+      savedList?.filter((element) => element.id === character.id)?.length > 0
+    ) {
+      setSaved(true);
+    }
+  }, []);
 
   return (
     <Card className="mx-2" onClick={handleShow} style={{ cursor: "pointer" }}>
@@ -18,7 +52,20 @@ function CharacterCard(props) {
         src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
       />
       <Card.Body>
-        <Card.Title>{character.name}</Card.Title>
+        <Card.Title className="d-flex justify-content-between">
+          <span>{character.name}</span>
+          <Button
+            size="sm"
+            variant="light"
+            className="border"
+            onClick={(e) => {
+              handleSave(character);
+              e.stopPropagation();
+            }}
+          >
+            {saved ? <span>✅ Saved</span> : <span>Save</span>}
+          </Button>
+        </Card.Title>
         <Card.Text>
           {character.description ? (
             character.description?.length > 80 ? (

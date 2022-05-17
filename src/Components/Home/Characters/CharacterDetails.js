@@ -1,10 +1,47 @@
-import React from "react";
-import { Image } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Button, Image } from "react-bootstrap";
 import { connect } from "react-redux";
+
+import { setState, getState } from "../../../utils";
 
 function CharacterDetails(props) {
   // CONSTANTS
   const { selectedCharacter } = props;
+
+  // STATES
+  const [saved, setSaved] = useState(false);
+
+  // FUNCTIONS
+  const handleSave = (character) => {
+    let savedList = getState("saved");
+
+    if (savedList?.length > 0) {
+      if (
+        savedList?.filter((element) => element.id === character.id)?.length > 0
+      ) {
+        setState("saved", [
+          ...savedList?.filter((element) => element.id !== character.id),
+        ]);
+        setSaved(false);
+      } else {
+        setState("saved", [...savedList, character]);
+        setSaved(true);
+      }
+    } else {
+      setState("saved", [character]);
+      setSaved(true);
+    }
+  };
+
+  useEffect(() => {
+    let savedList = getState("saved");
+    if (
+      savedList?.filter((element) => element.id === selectedCharacter.id)
+        ?.length > 0
+    ) {
+      setSaved(true);
+    }
+  }, []);
 
   return (
     <div className="px-3 px-md-4 pb-4">
@@ -14,8 +51,21 @@ function CharacterDetails(props) {
         className="img-fluid mb-3 mb-md-4"
         style={{ height: "300px", width: "auto" }}
       />
+      <div className="d-flex align-items-center justify-content-between mb-3">
+        <p className="fw-bold text-uppercase mb-0">Description</p>
+        <Button
+          size="sm"
+          variant="light"
+          className="border"
+          onClick={(e) => {
+            handleSave(selectedCharacter);
+            e.stopPropagation();
+          }}
+        >
+          {saved ? <span>✅ Saved</span> : <span>Save</span>}
+        </Button>
+      </div>
 
-      <p className="fw-bold text-uppercase">Description</p>
       <p>
         {selectedCharacter.description ? (
           selectedCharacter.description
