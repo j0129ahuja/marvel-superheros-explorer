@@ -20,7 +20,7 @@ function Pagination(props) {
 
   return (
     <Row className="align-items-center justify-content-center p-3 p-md-4">
-      <Col md={2} xs={6}>
+      <Col md={2} xs={4}>
         <Button
           size="lg"
           variant="light"
@@ -31,7 +31,7 @@ function Pagination(props) {
           Previous
         </Button>
       </Col>
-      <Col md={1}>
+      <Col md={1} xs={4}>
         {characterList?.length === 0 ? (
           <p
             className="mb-0 text-center fw-bold lead border rounded"
@@ -48,7 +48,7 @@ function Pagination(props) {
           </p>
         )}
       </Col>
-      <Col md={2} xs={6}>
+      <Col md={2} xs={4}>
         <Button
           size="lg"
           variant="primary"
