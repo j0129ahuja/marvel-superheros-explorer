@@ -6,7 +6,7 @@ import { setCurrentPage } from "../../../store/actions";
 
 function Pagination(props) {
   // CONSTANTS
-  const { currentPage, setCurrentPage, totalCount } = props;
+  const { currentPage, setCurrentPage, totalCount, characterList } = props;
 
   // FUNCTIONS
   const handlePrevious = () => {
@@ -26,17 +26,27 @@ function Pagination(props) {
           variant="light"
           className="rounded-1 px-3 w-100"
           onClick={handlePrevious}
+          disabled={characterList?.length === 0}
         >
           Previous
         </Button>
       </Col>
       <Col md={1}>
-        <p
-          className="mb-0 text-center fw-bold lead border rounded"
-          style={{ cursor: "default" }}
-        >
-          {currentPage} / {Math.ceil(totalCount / 3)}
-        </p>
+        {characterList?.length === 0 ? (
+          <p
+            className="mb-0 text-center fw-bold lead border rounded"
+            style={{ cursor: "default" }}
+          >
+            0 / 0
+          </p>
+        ) : (
+          <p
+            className="mb-0 text-center fw-bold lead border rounded"
+            style={{ cursor: "default" }}
+          >
+            {currentPage} / {Math.ceil(totalCount / 3)}
+          </p>
+        )}
       </Col>
       <Col md={2} xs={6}>
         <Button
@@ -44,6 +54,7 @@ function Pagination(props) {
           variant="primary"
           className="rounded-1 px-3 w-100"
           onClick={handleNext}
+          disabled={characterList?.length === 0}
         >
           Next
         </Button>
@@ -55,6 +66,7 @@ function Pagination(props) {
 const mapStateToProps = (state) => ({
   currentPage: state.currentPage,
   totalCount: state.totalCount,
+  characterList: state.characterList,
 });
 
 export default connect(mapStateToProps, { setCurrentPage })(Pagination);

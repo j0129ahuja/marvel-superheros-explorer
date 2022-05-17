@@ -18,44 +18,50 @@ function Characters(props) {
 
   return (
     <>
-      <Row xs={1} md={3} className="g-2 mb-3">
-        {characterList.map((character) => (
-          <Col key={character.id}>
-            <Card
-              className="mx-2"
-              onClick={() => handleShow(character)}
-              style={{ cursor: "pointer" }}
-            >
-              <Card.Img
-                variant="top"
-                src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-              />
-              <Card.Body>
-                <Card.Title>{character.name}</Card.Title>
-                <Card.Text>
-                  {character.description ? (
-                    character.description?.length > 80 ? (
-                      <span>
-                        {character.description?.substr(0, 80) + "..."}
-                        <a className="ms-1 mb-0">Read more</a>
-                      </span>
+      {characterList?.length > 0 ? (
+        <Row xs={1} md={3} className="g-2 mb-3">
+          {characterList.map((character) => (
+            <Col key={character.id}>
+              <Card
+                className="mx-2"
+                onClick={() => handleShow(character)}
+                style={{ cursor: "pointer" }}
+              >
+                <Card.Img
+                  variant="top"
+                  src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                />
+                <Card.Body>
+                  <Card.Title>{character.name}</Card.Title>
+                  <Card.Text>
+                    {character.description ? (
+                      character.description?.length > 80 ? (
+                        <span>
+                          {character.description?.substr(0, 80) + "..."}
+                          <a className="ms-1 mb-0">Read more</a>
+                        </span>
+                      ) : (
+                        <span>{character.description}</span>
+                      )
                     ) : (
-                      <span>{character.description}</span>
-                    )
-                  ) : (
-                    <i className="small">Description not available</i>
-                  )}
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">
-                  Modified: {character.modified}
-                </small>
-              </Card.Footer>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+                      <i className="small">Description not available</i>
+                    )}
+                  </Card.Text>
+                </Card.Body>
+                <Card.Footer>
+                  <small className="text-muted">
+                    Modified: {character.modified}
+                  </small>
+                </Card.Footer>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <p className="p-4 p-md-5 text-center">
+          <i>No results available, try to search something else</i>
+        </p>
+      )}
 
       {show && (
         <Offcanvas show={show} onHide={handleClose} className="w-50">

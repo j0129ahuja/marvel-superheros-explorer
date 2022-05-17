@@ -5,6 +5,8 @@ import {
   SET_SELECTED_CHARACTER,
   SET_SEARCH_TEXT,
   SET_TOTAL_COUNT,
+  SET_LOADING_SUGGESTION_LIST,
+  SET_SUGGESTION_LIST,
 } from "./actionTypes";
 
 export const setCurrentPage = (data) => {
@@ -45,6 +47,20 @@ export const setSearchText = (data) => {
 export const setTotalCount = (data) => {
   return {
     type: SET_TOTAL_COUNT,
+    data,
+  };
+};
+
+export const setLoadingSuggestionList = (data) => {
+  return {
+    type: SET_LOADING_SUGGESTION_LIST,
+    data,
+  };
+};
+
+export const setSuggestionList = (data) => {
+  return {
+    type: SET_SUGGESTION_LIST,
     data,
   };
 };

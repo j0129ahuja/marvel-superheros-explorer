@@ -7,6 +7,8 @@ const initialState = {
   selectedCharacter: {},
   searchText: "",
   totalCount: 0,
+  loadingSuggestionList: true,
+  suggestionList: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +35,14 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SET_TOTAL_COUNT: {
       return { ...state, totalCount: action.data };
+    }
+
+    case actionTypes.SET_LOADING_SUGGESTION_LIST: {
+      return { ...state, loadingSuggestionList: action.data };
+    }
+
+    case actionTypes.SET_SUGGESTION_LIST: {
+      return { ...state, suggestionList: action.data };
     }
 
     default:
