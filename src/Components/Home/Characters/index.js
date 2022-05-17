@@ -23,7 +23,10 @@ function Characters(props) {
         <Row xs={1} md={3} className="g-2 mb-3">
           {characterList.map((character) => (
             <Col key={character.id}>
-              <CharacterCard character={character} />
+              <CharacterCard
+                handleShow={() => setSelectedCharacter(character)}
+                character={character}
+              />
             </Col>
           ))}
         </Row>
@@ -39,7 +42,7 @@ function Characters(props) {
             <Offcanvas.Title>{selectedCharacter.name}</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <CharacterDetails />
+            <CharacterDetails selectedCharacter={selectedCharacter} />
           </Offcanvas.Body>
         </Offcanvas>
       )}

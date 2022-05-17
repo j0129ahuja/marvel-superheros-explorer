@@ -7,14 +7,12 @@ import { getState, setState } from "../../../utils";
 
 function CharacterCard(props) {
   // CONSTANTS
-  const { character, setSelectedCharacter } = props;
+  const { character, setSelectedCharacter, handleShow } = props;
 
   // STATES
   const [saved, setSaved] = useState(false);
 
   // FUNCTIONS
-  const handleShow = () => setSelectedCharacter(character);
-
   const handleSave = (character) => {
     let savedList = getState("saved");
 

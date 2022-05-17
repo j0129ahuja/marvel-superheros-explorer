@@ -210,7 +210,7 @@ function CharacterDetails(props) {
 }
 
 const mapStateToProps = (state) => ({
-  selectedCharacter: state.selectedCharacter,
+  //   selectedCharacter: state.selectedCharacter,
 });
 
 export default connect(mapStateToProps)(CharacterDetails);
